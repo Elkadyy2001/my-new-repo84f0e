@@ -24,14 +24,14 @@ jobs:
     - name: Generate KeyStore
       run: |
          
-          keytool -genkeypair -v -keystore AppMare.keystore  -keyalg RSA -keysize 2048 -validity 365000 -storepass "${{ steps.generatedpassword.outputs.password }}" -alias "AppMare" -dname "cn=Appmare"
+          keytool -genkeypair -v -keystore $(pwd)/AppMare.keystore  -keyalg RSA -keysize 2048 -validity 365000 -storepass "${{ steps.generatedpassword.outputs.password }}" -alias "AppMare" -dname "cn=Appmare"
 
     - name: Setup Maui
       run: dotnet workload install maui
     - name: Publish App
       run: |
          
-           dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="AppMare.keystore" -p:AndroidSigningKeyAlias="AppMare" -p:AndroidSigningKeyPass="${{ steps.generatedpassword.outputs.password }}" -p:AndroidSigningStorePass="${{ steps.generatedpassword.outputs.password }}"
+           dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="$(pwd)/AppMare.keystore" -p:AndroidSigningKeyAlias="AppMare" -p:AndroidSigningKeyPass="${{ steps.generatedpassword.outputs.password }}" -p:AndroidSigningStorePass="${{ steps.generatedpassword.outputs.password }}"
     - name: Find and Copy AAB and APK
       run: |
      
