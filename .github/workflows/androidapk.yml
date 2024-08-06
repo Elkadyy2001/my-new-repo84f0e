@@ -19,7 +19,7 @@ jobs:
       run: |
        wget -O "$(pwd)/AppName.zip" "${{ secrets.PROJECTURL }}"
        brew install sevenzip
-       7z x "$(pwd)/AppName.zip" -o $(pwd)
+       7z x "$(pwd)/AppName.zip"
        cd "$(pwd)"
     - name: Generate KeyStore
       run: |
