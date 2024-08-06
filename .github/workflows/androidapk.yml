@@ -24,7 +24,7 @@ jobs:
     - name: Generate KeyStore
       run: |
          
-          keytool -genkeypair -v -keystore AppMare.keystore  -keyalg RSA -keysize 2048 -validity 365000 -storepass "${{ steps.generatedpassword.outputs.password }}" -alias ${{ secrets.KEYSTOREALIAS }}" -dname "cn=Appmare"
+          keytool -genkeypair -v -keystore AppMare.keystore  -keyalg RSA -keysize 2048 -validity 365000 -storepass "${{ steps.generatedpassword.outputs.password }}" -alias "${{ secrets.KEYSTOREALIAS }}" -dname "cn=Appmare"
 
     - name: Setup Maui
       run: dotnet workload install maui
